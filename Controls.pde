@@ -100,7 +100,6 @@ void countFrames(String usePath) {
     String[] allFiles = dataFolder.list();
     for (int j=0;j<allFiles.length;j++) {
       if (
-        allFiles[j].toLowerCase().endsWith("tif") ||
         allFiles[j].toLowerCase().endsWith("png") ||
         allFiles[j].toLowerCase().endsWith("jpg") ||
         allFiles[j].toLowerCase().endsWith("jpeg") ||
@@ -134,7 +133,7 @@ void keyPressed(){
 }
 
 void imgLoader(){
-img = loadImageIO((String) imgNames.get(imgCounter));
+img = loadImage((String) imgNames.get(imgCounter));
 }
 
 void console(){

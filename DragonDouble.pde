@@ -1,5 +1,4 @@
 import processing.opengl.*;
-import javax.media.jai.*;
 import fullscreen.*;
 
 int sW, sH;
