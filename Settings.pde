@@ -7,9 +7,7 @@ class Settings {
       settings = new Data();
       settings.load(_s);
       for (int i=0;i<settings.data.length;i++) {
-        if (settings.data[i].equals("Image Aspect Ratio - Width")) rW = setFloat(settings.data[i+1]);
-        if (settings.data[i].equals("Image Aspect Ratio - Height")) rH = setFloat(settings.data[i+1]);
-        if (settings.data[i].equals("Match Image Width")) matchWidth = setBoolean(settings.data[i+1]);
+        //if (settings.data[i].equals("Global Image Scale (0 - 1.0)")) globalImageScale = setFloat(settings.data[i+1]);
        }
     } 
     catch(Exception e) {

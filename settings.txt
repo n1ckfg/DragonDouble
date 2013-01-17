@@ -1,9 +1,0 @@
-Image Aspect Ratio - Width
-1.78
-
-Image Aspect Ratio - Height
-1
-
-Match Image Width
-true
-

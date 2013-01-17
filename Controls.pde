@@ -30,13 +30,13 @@ void guiHandler(){
   if(showGui){
     cursor();
     if(fs.isFullScreen()){
-      sprite.debug = true;
+      try{ sprite.debug = true; }catch(Exception e){ }
     }else{
-      sprite.debug = false;
+      try{ sprite.debug = false; }catch(Exception e){ }
     }
   }else{
     noCursor();
-    sprite.debug = false;
+    try{ sprite.debug = false; }catch(Exception e){ }
   }
 }
 
@@ -75,6 +75,7 @@ void buttonsRefresh() {
 }
 
 void doButtonLoad(){
+  doInitSprite = true;
   if(!buttons[buttonLoadNum].grayed){
   doButtonStop();
     try{
@@ -142,6 +143,8 @@ void countFrames(String usePath) {
         }
     }
     imgLoader();
+    if(doInitSprite) initSprite();
+    doInitSprite = false;
 }
 
 void keyPressed(){
@@ -186,7 +189,7 @@ void imgLoader(){
 
 void console(){
   if(debug){
-      println(sprite.vertices[0] + " " + sprite.vertices_proj[0]);
+      //try{ println(sprite.vertices[0] + " " + sprite.vertices_proj[0]); }catch(Exception e){ }
   }
 }
 
