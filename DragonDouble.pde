@@ -7,14 +7,22 @@ FullScreen fs;
 float rW = 16;
 float rH = 9;
 boolean matchWidth = true;
-PImage img;
+PImage[] img = new PImage[1];
 ArrayList imgNames;
 boolean showGui = true;
 boolean debug = true;
 
+AnimSprite sprite;
+int vertexTarget = 0;
+boolean vertexTargetOn = false;
+
+String folderPath;
+File dataFolder;
+
 int buttonLoadNum = 0;
-int buttonScreenNum = 1;
-int totalButtons = 2;
+int buttonReloadNum = 1;
+int buttonScreenNum = 2;
+int totalButtons = 3;
 //--
 Button[] buttons = new Button[totalButtons];
 int buttonOffset = 50;
@@ -23,7 +31,6 @@ int buttonFontSize = 15;
 
 boolean modeImg = false;
 int imgCounter = 0;
-int imgCounterMax = 0;
 int mouseTimerCounter = 0;
 int mouseTimerCounterMax = fps * 3;
 
@@ -44,7 +51,13 @@ void setup(){
     sW = int((screen.height/rH)*rW);
     sH = screen.height;
   }
-  img = createImage(sW,sH,RGB);
+  img[0] = createImage(sW,sH,RGB);
+  sprite = new AnimSprite(img,1);
+  sprite.makeTexture();
+  sprite.p.x = sW/2;
+  sprite.p.y = sH/2;
+  sprite.s.x = 1.0;
+  sprite.s.y = 1.0;
   buttonSetup();
   PFont font = createFont(fontFace, 3*fontSize);
   textFont(font,fontSize);
@@ -52,13 +65,12 @@ void setup(){
 }
 
 void draw(){
-  guiHandler();
   background(0);
-  noStroke();
-  fill(255);
-  imageMode(CENTER);
+  guiHandler();
   try{
-    image(img,screen.width/2,screen.height/2,sW,sH);
+    sprite.frames[0] = img[0];
+    moveVertices();
+    sprite.run();
   }catch(Exception e){ }
   if(showGui){
     buttonHandler();
