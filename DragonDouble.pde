@@ -11,6 +11,7 @@ PImage[] img = new PImage[1];
 ArrayList imgNames;
 boolean showGui = true;
 boolean debug = true;
+int grabVerticesRange = 20;
 
 AnimSprite sprite;
 int vertexTarget = 0;
@@ -41,6 +42,7 @@ String fontFace = "Arial";
 int saveDelayInterval = 0;
 
 void setup(){
+  Settings settings = new Settings("settings.text");
   size(screen.width,screen.height,OPENGL);
   frameRate(fps);
   smooth();

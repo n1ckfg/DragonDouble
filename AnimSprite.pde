@@ -14,6 +14,7 @@ class AnimSprite {
   boolean is3D = false;
   boolean isTexture = false;
   boolean debug = false;
+  int debugCircleSize = 10;
   boolean hovered = false;
   boolean clicked = false;
   //position, rotation, scale, target
@@ -203,13 +204,13 @@ PVector projToVert(PVector _p, PVector _centerPoint){
         noStroke();
         ellipseMode(CENTER);
         fill(255,0,0);
-        ellipse(vertices[0].x,vertices[0].y,5,5);
+        ellipse(vertices[0].x,vertices[0].y,debugCircleSize,debugCircleSize);
         fill(0,255,0);
-        ellipse(vertices[1].x,vertices[1].y,5,5);
+        ellipse(vertices[1].x,vertices[1].y,debugCircleSize,debugCircleSize);
         fill(0,0,255);
-        ellipse(vertices[2].x,vertices[2].y,5,5);
+        ellipse(vertices[2].x,vertices[2].y,debugCircleSize,debugCircleSize);
         fill(255,0,255);
-        ellipse(vertices[3].x,vertices[3].y,5,5);
+        ellipse(vertices[3].x,vertices[3].y,debugCircleSize,debugCircleSize);
       }
     }
     popMatrix();

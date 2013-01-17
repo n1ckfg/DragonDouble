@@ -29,7 +29,7 @@ void guiHandler(){
   mouseTimer();
   if(showGui){
     cursor();
-    if(!fs.isFullScreen()){ //vertex deform doesn't work well with fullscreen
+    if(fs.isFullScreen()){
       sprite.debug = true;
     }else{
       sprite.debug = false;
@@ -41,10 +41,10 @@ void guiHandler(){
 }
 
 void moveVertices(){
-  if(mousePressed){
+      if(mousePressed && fs.isFullScreen()){
     PVector m = new PVector(mouseX,mouseY);
     for(int i=0;i<sprite.vertices_proj.length;i++){
-      if(hitDetect(m.x,m.y,10,10,sprite.vertices_proj[i].x,sprite.vertices_proj[i].y,10,10)){
+      if(hitDetect(m.x,m.y,grabVerticesRange,grabVerticesRange,sprite.vertices_proj[i].x,sprite.vertices_proj[i].y,grabVerticesRange,grabVerticesRange)){
         vertexTargetOn=true;
         vertexTarget = i;
       }
@@ -53,7 +53,7 @@ void moveVertices(){
       sprite.vertices[vertexTarget] = sprite.projToVert(m,sprite.p);
     }
   }
-}
+  }
 
 void buttonSetup(){
   buttons[buttonLoadNum] = new Button(buttonOffset, buttonOffset, buttonSize, color(240, 10, 10), buttonFontSize, "load", "ellipse");
