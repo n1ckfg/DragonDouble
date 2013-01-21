@@ -1,3 +1,5 @@
+import java.io.File;
+
 ///////////////////////////
 // DATA CLASS
 // Marius Watz - http://workshop.evolutionzone.com
