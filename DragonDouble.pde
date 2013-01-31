@@ -30,7 +30,8 @@ ControlP5 controlP5;
 int buttonLoadNum = 0;
 int buttonReloadNum = 1;
 int buttonScreenNum = 2;
-int totalButtons = 3;
+int buttonResetNum = 3;
+int totalButtons = 4;
 //--
 Button[] buttons = new Button[totalButtons];
 int buttonOffset = 50;

@@ -23,6 +23,9 @@ void mouseReleased(){
   if (buttons[buttonScreenNum].clicked){
     doButtonScreen();
   }
+  if (buttons[buttonResetNum].clicked){
+    doButtonReset();
+  }
 }
 
 void guiHandler(){
@@ -59,6 +62,7 @@ void buttonSetup(){
   buttons[buttonLoadNum] = new Button(buttonOffset, buttonOffset, buttonSize, color(240, 10, 10), buttonFontSize, "load", "ellipse");
   buttons[buttonReloadNum] = new Button(buttonOffset * 2.25, buttonOffset, buttonSize, color(240, 240, 10), buttonFontSize, "refresh", "ellipse");
   buttons[buttonScreenNum] = new Button(buttonOffset * 3.5, buttonOffset, buttonSize, color(10, 240, 10), buttonFontSize, "screen", "rect");
+  buttons[buttonResetNum] = new Button(buttonOffset * 4.75, buttonOffset, buttonSize, color(10, 240, 240), buttonFontSize, "reset", "ellipse");
 }
 
 void buttonHandler() {
@@ -94,6 +98,14 @@ void doButtonReload(){
     countFrames(folderPath);
   }catch(Exception e){ 
     println("error reloading images");
+  }
+}
+
+void doButtonReset(){
+  try{
+    initSprite();
+  }catch(Exception e){ 
+    println("error resetting vertices");
   }
 }
 
