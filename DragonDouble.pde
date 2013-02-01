@@ -17,6 +17,9 @@ float globalImageScale = 1.0;
 AnimSprite sprite;
 int vertexTarget = 0;
 boolean vertexTargetOn = false;
+Settings settings;
+boolean firstRun = true;
+String sayText = "";
 
 String folderPath;
 File dataFolder;
@@ -31,12 +34,14 @@ int buttonLoadNum = 0;
 int buttonReloadNum = 1;
 int buttonScreenNum = 2;
 int buttonResetNum = 3;
-int totalButtons = 4;
+int buttonSaveNum = 4;
+int totalButtons = 5;
 //--
 Button[] buttons = new Button[totalButtons];
 int buttonOffset = 50;
 int buttonSize = 50;
 int buttonFontSize = 15;
+boolean showTextHints=false; //disabled because fullscreen library screws up text after first fullscreen!
 
 boolean modeImg = false;
 int imgCounter = 0;
@@ -50,7 +55,6 @@ String fontFace = "Arial";
 int saveDelayInterval = 0;
 
 void setup() {
-  Settings settings = new Settings("settings.txt");
   /*
   controlP5 = new ControlP5(this);
    s1 = controlP5.addSlider("% scale",0,100,128,215,33,100,30);
@@ -62,7 +66,7 @@ void setup() {
   smooth();
   println(sW + " " + sH);
   buttonSetup();
-  PFont font = createFont(fontFace, 3*fontSize);
+  PFont font = createFont(fontFace, 2*fontSize);
   textFont(font, fontSize);
   fs = new FullScreen(this);
 }
@@ -92,6 +96,10 @@ void initSprite() {
   sprite.makeTexture();
   sprite.p.x = sW/2;
   sprite.p.y = sH/2;
+  if(firstRun){
+    settings = new Settings("settings.txt");
+    firstRun=false;
+  }
 }
 
 boolean hitDetect(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2) {

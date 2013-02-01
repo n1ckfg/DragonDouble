@@ -26,6 +26,9 @@ void mouseReleased(){
   if (buttons[buttonResetNum].clicked){
     doButtonReset();
   }
+  if (buttons[buttonSaveNum].clicked){
+    doButtonSave();
+  }
 }
 
 void guiHandler(){
@@ -63,12 +66,24 @@ void buttonSetup(){
   buttons[buttonReloadNum] = new Button(buttonOffset * 2.25, buttonOffset, buttonSize, color(240, 240, 10), buttonFontSize, "refresh", "ellipse");
   buttons[buttonScreenNum] = new Button(buttonOffset * 3.5, buttonOffset, buttonSize, color(10, 240, 10), buttonFontSize, "screen", "rect");
   buttons[buttonResetNum] = new Button(buttonOffset * 4.75, buttonOffset, buttonSize, color(10, 240, 240), buttonFontSize, "reset", "ellipse");
+  buttons[buttonSaveNum] = new Button(buttonOffset * 6, buttonOffset, buttonSize, color(10, 80, 240), buttonFontSize, "save", "ellipse");
 }
 
 void buttonHandler() {
   for (int i=0;i<buttons.length;i++) {
     buttons[i].checkButton();
     buttons[i].drawButton();
+    if(buttons[i].hovered&&showTextHints){
+      if(buttons[buttonLoadNum].hovered) sayText="Load a folder of images.";
+      if(buttons[buttonReloadNum].hovered) sayText="Refresh the current folder.";
+      if(buttons[buttonScreenNum].hovered) sayText="Toggle fullscreen mode.";
+      if(buttons[buttonResetNum].hovered) sayText="Reset vertices.";
+      if(buttons[buttonSaveNum].hovered) sayText="Save vertices.";
+      noStroke();
+      fill(255);
+      textAlign(CORNER);
+      text(sayText,buttonOffset/1.75, buttonSize*2);
+    }
   }
 }
 
@@ -79,6 +94,7 @@ void buttonsRefresh() {
 }
 
 void doButtonLoad(){
+  firstRun=true;
   doInitSprite = true;
   if(!buttons[buttonLoadNum].grayed){
   doButtonStop();
@@ -98,6 +114,14 @@ void doButtonReload(){
     countFrames(folderPath);
   }catch(Exception e){ 
     println("error reloading images");
+  }
+}
+
+void doButtonSave(){
+  try{
+    settings.writeSettings("settings.txt");
+  }catch(Exception e){ 
+    println("error saving vertex info");
   }
 }
 
